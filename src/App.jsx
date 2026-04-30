@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { marked } from "marked";
-import matter from "gray-matter";
+//import matter from "gray-matter";
+import { default as matter } from 'gray-matter';
 import { supabase } from "./lib/supabase";
 import "./styles.css";
 
