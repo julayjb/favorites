@@ -1,9 +1,43 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { marked } from "marked";
-//import matter from "gray-matter";
-import { default as matter } from 'gray-matter';
 import { supabase } from "./lib/supabase";
 import "./styles.css";
+
+// Parse frontmatter manualmente (sem depender de gray-matter que usa Buffer)
+function parseFrontmatter(content) {
+  const match = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  
+  if (!match) {
+    return { data: {}, content };
+  }
+
+  const [, frontmatterText, markdownContent] = match;
+  const data = {};
+
+  // Parse simples de YAML
+  frontmatterText.split('\n').forEach(line => {
+    const colonIndex = line.indexOf(':');
+    if (colonIndex > 0) {
+      const key = line.substring(0, colonIndex).trim();
+      let value = line.substring(colonIndex + 1).trim();
+
+      // Remove quotes se existirem
+      if ((value.startsWith('"') && value.endsWith('"')) || 
+          (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+
+      // Parse arrays simples (ex: [tag1, tag2])
+      if (value.startsWith('[') && value.endsWith(']')) {
+        value = value.slice(1, -1).split(',').map(v => v.trim());
+      }
+
+      data[key] = value;
+    }
+  });
+
+  return { data, content: markdownContent };
+}
 
 function slugify(value = "") {
  return value
@@ -220,7 +254,7 @@ export default function App() {
  const parsedDocs = await Promise.all(
  files.map(async (file) => {
  const raw = await file.text();
- const parsed = matter(raw);
+ const parsed = parseFrontmatter(raw);
  const frontmatter = parsed.data || {};
  const content = parsed.content?.trim() || "";
 
