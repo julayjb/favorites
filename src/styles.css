@@ -432,6 +432,13 @@ input::placeholder {
   border-left: 3px solid var(--accent);
 }
 
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
 /* ─── Blank / Error states ──────────────────────────── */
 
 .blank-panel {
