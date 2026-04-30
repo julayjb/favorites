@@ -173,7 +173,7 @@ export default function App() {
  setDocuments(data || []);
 
  if (!selectedId && data?.length) {
- setSelectedId(data[0]id);
+ setSelectedId(data[0].id);
  }
  }
 
