@@ -21,7 +21,7 @@ function parseDateFromFilename(name) {
 
 function parseTitleFromContent(content) {
  const match = content.match(/^#\s+(.+)$/m);
- return match ? match[1]trim() : null;
+ return match ? match[1].trim() : null;
 }
 
 function parseTitleFromFilename(name) {
