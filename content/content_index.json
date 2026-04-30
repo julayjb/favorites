@@ -1,0 +1,18 @@
+[
+  {
+    "id": "2026-04-10-newsletter-ia",
+    "title": "Newsletter: IA aplicada no dia a dia",
+    "date": "2026-04-10",
+    "source": "Newsletter",
+    "tags": ["ia", "produtividade"],
+    "path": "/content/2026/2026-04-10-newsletter-ia.md"
+  },
+  {
+    "id": "2026-03-28-post-produto",
+    "title": "Post: Como pensar produto com clareza",
+    "date": "2026-03-28",
+    "source": "Blog",
+    "tags": ["produto", "clareza"],
+    "path": "/content/2026/2026-03-28-post-produto.md"
+  }
+]
